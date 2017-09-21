@@ -1,27 +1,11 @@
-pipeline {
-   agent any
-   environment {
-      ACRCRED = credentials('sania_azure_container_registry')
-   }
-   stages {
+@Library('jenkinslib') _
 
-       stage('Docker Build') {
-           steps {
-               script{
-                  def pom = readMavenPom file: 'scddatanps/pom.xml'
-                  env.POM_VERSION = pom.version
-                  sh returnStdout: true, script:"mvn -f scddatanps/pom.xml clean install"
-                  sh returnStdout: true, script:"mvn -f scddatanps/pom.xml package docker:build"
-               }
-           }
-       }
+mavenDockerBuilderPipeline {
 
-       stage('Docker deploy') {
-            steps {
-               sh 'docker login sania.azurecr.io -u $ACRCRED_USR -p $ACRCRED_PSW'
-               sh 'docker tag sanitas-scddatanps sania.azurecr.io/scddatanps:'+env.POM_VERSION+'.Build-'+env.BUILD_NUMBER
-               sh 'docker push sania.azurecr.io/scddatanps:'+env.POM_VERSION+'.Build-'+ env.BUILD_NUMBER
-            }
-       }
-   }
+  containerName = 'test-maven-app'
+  dockerRepo = ''
+  registryCredentialsId = 'docker-credentials'
+  buildType = 'build'
+  pomPath = 'scddatanps/'
+
 }
