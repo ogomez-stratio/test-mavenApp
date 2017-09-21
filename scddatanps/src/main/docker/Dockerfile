@@ -2,7 +2,7 @@ FROM frolvlad/alpine-oraclejdk8:slim
 
 VOLUME /tmp
 
-ADD scddatanps-0.0.2-SNAPSHOT.jar scddatanps.jar
+ADD scddatanps-0.0.4-SNAPSHOT.jar scddatanps.jar
 
 RUN sh -c 'touch /scddatanps.jar'
 
