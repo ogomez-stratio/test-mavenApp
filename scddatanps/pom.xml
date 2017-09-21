@@ -5,7 +5,7 @@
 
     <groupId>com.stratio.scddatanps</groupId>
     <artifactId>scddatanps</artifactId>
-    <version>0.0.2-SNAPSHOT</version><!-- lookup version Dockerfile -->
+    <version>0.0.3-SNAPSHOT</version><!-- lookup version Dockerfile -->
     <packaging>${scd.packaging}</packaging>
 
     <name>scddatanps</name>
