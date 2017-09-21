@@ -2,7 +2,7 @@
 
 mavenDockerBuilderPipeline {
 
-  containerName = 'scddatanps'
+  containerName = 'sanitas-scddatanps'
   dockerRepo = ''
   registryCredentialsId = 'docker-credentials'
   buildType = 'build'
