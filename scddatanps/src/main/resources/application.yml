@@ -1,0 +1,58 @@
+server:
+  port: 8091
+  context-path: /scddatanps
+spring:
+  application:
+    name: scddatanps
+  datasource:
+    url: jdbc:postgresql://172.18.0.3:5432/sanitasdb?currentSchema=seguros
+    username: sanitas
+    password: Sanitas2016
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+management:
+  context-path: /admin
+  security:
+    enabled: false
+logging:
+  level:
+    com.stratio : DEBUG
+  file: scddatanps.log
+scd:
+   limitRecordScoresByChannel: 1
+   channels:
+      -
+        channel: VOZ
+        types:
+          - VOZ
+          - CALLBACK
+      -
+        channel: CORREO
+        types:
+          - EMAIL
+      -
+        channel: WEB
+        types:
+          - MISANITAS
+      -
+        channel: OFICINAS
+        types:
+          - OFICINAS
+      -
+        channel: ASINTENCIAL
+        types:
+          - URGENCIAS
+          - CONSULTAS
+          - DENTAL
+          - HOSPITALIZACION
+          - PRUEBAS
+
+
+

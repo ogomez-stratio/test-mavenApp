@@ -1,0 +1,73 @@
+version: '2'
+services:
+
+###ENVIRONMENT
+  sanitas-docker-ui:
+    image: uifd/ui-for-docker
+    container_name: scd-docker-ui
+    hostname: scd-docker-ui
+    privileged: true
+    ports:
+      - 9999:9000
+    volumes:
+      -  /var/run/docker.sock:/var/run/docker.sock
+    cpu_shares: 20
+
+  sanitas-zookeeper:
+    image: sanitas-zookeeper
+    container_name: scd-zookeeper
+    hostname: scd-zookeeper
+    ports:
+      - 2181:2181
+    cpu_shares: 51
+
+  sanitas-zookeeper-webui:
+    image: tobilg/zookeeper-webui
+    container_name: scd-zookeeper-webui
+    hostname: scd-zookeeper-webui
+    ports:
+      - 8085:8080
+    environment:
+      USER: sanitas
+      PASSWORD: sanitas
+      ZK_DEFAULT_NODE: scd-zookeeper:2181
+    cpu_shares: 10
+
+  sanitas-kafka:
+    image: sanitas-kafka
+    container_name: scd-kafka
+    hostname: scd-kafka
+    ports:
+      - 9092:9092
+      - 9001:9000
+    depends_on:
+      - sanitas-zookeeper
+    cpu_shares: 102
+
+  sanitas-postgresbd-c:
+    image: postgres:9.3
+    container_name: scd-postgresbdc
+    hostname: scd-postgresbdc
+    ports:
+      - 5432:5432
+    cpu_shares: 102
+
+  sanitas-deployment:
+    image: sanitas-deployment
+    container_name: scd-deployment
+    hostname: scd-deployment
+    cpu_shares: 10
+    links:
+      - sanitas-kafka
+      - sanitas-postgresbd-c
+
+  sanitas-provision:
+    image: sanitas-provision
+    container_name: scd-provision
+    hostname: scd-provision
+    depends_on:
+      - sanitas-zookeeper
+      - sanitas-kafka
+      - sanitas-postgresbd-c
+      - sanitas-deployment
+    cpu_shares: 10

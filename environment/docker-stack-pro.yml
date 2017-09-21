@@ -1,0 +1,39 @@
+version: "3"
+services:
+  scddatanps:
+    image: sania.azurecr.io/scddatanps:10
+    hostname: scddatanps
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=pro
+      - SCDDATANPS_SERVER_PORT=8081
+      - SCDDATANPS_SPRING_DATASOURCE_DBHOST=172.23.12.28
+      - SCDDATANPS_SPRING_DATASOURCE_DBNAME=sanitasdb
+      - SCDDATANPS_SPRING_DATASOURCE_DBSCHEMA=seguros
+      - SCDDATANPS_SPRING_DATASOURCE_USER=readonly
+      - SCDDATANPS_SPRING_DATASOURCE_PWD=prT97TnENs7DraMM
+      - SCDDATANPS_LOGGING_LEVEL=DEBUG
+
+    networks:
+      - pre-dlake-scd-acs-network
+    deploy:
+      placement:
+          constraints: [node.role==worker, node.labels.role==frontend]
+      replicas: 2
+
+  scdproxy:
+    image: sania.azurecr.io/scd-proxy:1.0.0
+    hostname: scdproxy
+    ports:
+      - "80:80"
+    networks:
+      - pro-dlake-scd-acs-network
+    deploy:
+      placement:
+          constraints: [node.role==worker, node.labels.role==frontend]
+
+networks:
+  pre-dlake-scd-acs-network:
+    external:
+      name: "pro-dlake-scd-acs-network"

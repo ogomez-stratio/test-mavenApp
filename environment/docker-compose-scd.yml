@@ -1,0 +1,12 @@
+version: '2'
+services:
+  scddatanps:
+      image: sanitas-scddatanps
+      container_name: scddatanps
+      hostname: scddatanps
+      ports:
+        - 8091:8091
+      environment:
+        SPRING_PROFILES_ACTIVE: ${SCD_PROFILES_ACTIVE}
+      network_mode: "host"
+

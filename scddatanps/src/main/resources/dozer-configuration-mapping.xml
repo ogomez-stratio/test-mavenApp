@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<configuration>
+		<stop-on-errors>true</stop-on-errors>
+		<date-format>MM/dd/yyyy HH:mm</date-format>
+		<wildcard>true</wildcard>
+	</configuration>
+	<mapping>
+		<class-a>com.stratio.scddatanps.domain.TouchpointNps</class-a>
+		<class-b>com.stratio.scddatanps.dto.TouchpointNpsDTO</class-b>
+		<field>
+			<a>touchpointNpsPk.clientId</a>
+			<b>clientId</b>
+		</field>
+		<field>
+			<a>touchpointNpsPk.statusDate</a>
+			<b>statusDate</b>
+		</field>
+		<field>
+			<a>touchpointNpsPk.channel</a>
+			<b>channel</b>
+		</field>
+        <field>
+            <a>touchpointNpsPk.datalakeDate</a>
+            <b>datalakeDate</b>
+        </field>
+	</mapping>
+</mappings>

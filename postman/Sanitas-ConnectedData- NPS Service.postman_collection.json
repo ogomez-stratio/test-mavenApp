@@ -1,0 +1,228 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Sanitas-ConnectedData: NPS Service",
+		"_postman_id": "2b4dad1c-85ec-ce02-136f-d67b82fc3206",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Scdnps",
+			"description": "Health Score Service",
+			"item": [
+				{
+					"name": "scdnps: get scores by channel",
+					"request": {
+						"url": {
+							"raw": "{{scdhs.protocol}}://{{scdhs.host}}:{{scdhs.port}}/{{scdhs.url.base}}/{{api.v}}/questions/1/search?qType=&state=",
+							"protocol": "{{scdhs.protocol}}",
+							"host": [
+								"{{scdhs.host}}"
+							],
+							"port": "{{scdhs.port}}",
+							"path": [
+								"{{scdhs.url.base}}",
+								"{{api.v}}",
+								"questions",
+								"1",
+								"search"
+							],
+							"query": [
+								{
+									"key": "qType",
+									"value": "",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "state",
+									"value": "",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "{{auth.key}}",
+								"value": "{{auth.value}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Health Score request to get the question that have to make to the clientID 1 that have first questions not answered.\n\nWill return the 8 first questions that client have to respond yet."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "zzzSimul_MessageProducer",
+			"description": "Project for publisher messages in activemq, kafka,...",
+			"item": [
+				{
+					"name": "SendMessageSmileQuestion",
+					"request": {
+						"url": "{{scd.protocol}}://{{scd.host}}:{{messageproducer.port}}/{{messageproducer.url.base}}/api/smile-answer",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"questionId\": \"17\",\n  \"clientId\": \"1\",\n  \"answer\": \"En un lugar de La Mancha...\",\n  \"answerDate\": \"2017-04-27T09:51:48\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "SendMessage2ActiveMq_Default",
+					"request": {
+						"url": "{{scd.protocol}}://{{scd.host}}:{{messageproducer.port}}/{{messageproducer.url.base}}/api",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Default: 1 event, Randon event type"
+					},
+					"response": []
+				},
+				{
+					"name": "SendMessage2ActiveMq_OptionalParams",
+					"request": {
+						"url": {
+							"raw": "{{scd.protocol}}://{{scd.host}}:{{messageproducer.port}}/{{messageproducer.url.base}}/api?numEvents=10&event=LOGIN",
+							"protocol": "{{scd.protocol}}",
+							"host": [
+								"{{scd.host}}"
+							],
+							"port": "{{messageproducer.port}}",
+							"path": [
+								"{{messageproducer.url.base}}",
+								"api"
+							],
+							"query": [
+								{
+									"key": "numEvents",
+									"value": "10"
+								},
+								{
+									"key": "event",
+									"value": "LOGIN"
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Default: 1 event, Randon event type"
+					},
+					"response": []
+				},
+				{
+					"name": "SendMessage2ActiveMq_OptionalParams",
+					"request": {
+						"url": {
+							"raw": "{{scd.protocol}}://{{scd.host}}:{{messageproducer.port}}/{{messageproducer.url.base}}/api?numEvents=1000",
+							"protocol": "{{scd.protocol}}",
+							"host": [
+								"{{scd.host}}"
+							],
+							"port": "{{messageproducer.port}}",
+							"path": [
+								"{{messageproducer.url.base}}",
+								"api"
+							],
+							"query": [
+								{
+									"key": "numEvents",
+									"value": "1000"
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Default: 1 event, Randon event type"
+					},
+					"response": []
+				},
+				{
+					"name": "Simul_MessageProducer_health",
+					"request": {
+						"url": "{{scd.protocol}}://{{scd.host}}:{{messageproducer.port}}/{{messageproducer.url.base}}/health",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetHealthScore",
+					"request": {
+						"url": "{{scd.protocol}}://{{scd.host}}:{{scdhs.port}}/{{scdhs.url.base}}/{{api.v}}/healthScore/1",
+						"method": "GET",
+						"header": [
+							{
+								"key": "{{auth.key}}",
+								"value": "{{auth.value}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Calcula el healthScore de un cliente"
+					},
+					"response": []
+				},
+				{
+					"name": "GetAnalitics",
+					"request": {
+						"url": "{{scd.protocol}}://{{scd.host}}:{{scdhs.port}}/{{scdhs.url.base}}/{{api.v}}/analytics/1",
+						"method": "GET",
+						"header": [
+							{
+								"key": "{{auth.key}}",
+								"value": "{{auth.value}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Obtiene analiticas de un cliente. Devuelve un histograma y la serie de datos."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

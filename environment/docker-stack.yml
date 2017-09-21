@@ -1,0 +1,48 @@
+version: '3'
+services:
+  scddatanps:
+      image: sanitas-scddatanps
+      hostname: scddatanps
+      ports:
+        - 8091:8091
+#      environment:
+#        SPRING_PROFILES_ACTIVE: pre
+      networks:
+            - dev-dlake-scd-network
+      deploy:
+#        placement:
+#            constraints: [node.role==worker, node.labels.role==backend]
+        replicas: 2
+
+
+  docker-swarm-visualizer:
+      image: dockersamples/visualizer
+      ports:
+          - 9090:8080
+      networks:
+          - dev-dlake-scd-network
+      volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+      deploy:
+          mode: replicated
+          replicas: 1
+          placement:
+              constraints: [node.role == manager]
+
+
+#  nginx-proxy:
+#      image: jwilder/nginx-proxy
+#      ports:
+#        - "80:80"
+#      volumes:
+#        - /var/run/docker.sock:/tmp/docker.sock:ro
+#      networks:
+#              - dev-dlake-scd-network
+#      deploy:
+#        placement:
+#            constraints: [node.role==manager, node.labels.role==frontend]
+
+networks:
+  dev-dlake-scd-network:
+    external:
+      name: "dev-dlake-scd-network"
