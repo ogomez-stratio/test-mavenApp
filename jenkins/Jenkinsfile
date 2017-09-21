@@ -2,7 +2,7 @@
 
 mavenDockerBuilderPipeline {
 
-  containerName = 'test-maven-app'
+  containerName = 'scddatanps'
   dockerRepo = ''
   registryCredentialsId = 'docker-credentials'
   buildType = 'build'
