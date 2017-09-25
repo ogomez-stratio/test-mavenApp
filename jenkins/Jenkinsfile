@@ -3,9 +3,9 @@
 mavenDockerBuilderPipeline {
 
   containerName = 'sanitas-scddatanps'
-  dockerRepo = ''
+  dockerBuildRepo = ''
+  dockerRcRepo = '127.0.0.1:5000'
   registryCredentialsId = 'docker-credentials'
-  buildType = 'build'
   pomPath = 'scddatanps/'
 
 }
