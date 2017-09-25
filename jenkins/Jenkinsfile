@@ -1,11 +1,10 @@
 @Library('jenkinslib') _
 
-mavenDockerBuilderPipeline {
+mavenDockerBuilderPipeline{
 
   containerName = 'sanitas-scddatanps'
   dockerBuildRepo = ''
   dockerRcRepo = '127.0.0.1:5000'
   registryCredentialsId = 'docker-credentials'
   pomPath = 'scddatanps/'
-
 }
