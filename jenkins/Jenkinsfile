@@ -9,8 +9,8 @@ mavenDockerBuilderPipeline{
   pomPath = 'scddatanps/'
 }
 uploadBlobArtifactPipeline{
-  containerName = 'sanitas-scddatanps'
-  pomPath = 'scddatanps'
+  containername = 'sanitas-scddatanps'
+  pompath = 'scddatanps'
   localpath ='./'
   storagecreds = 'creds'
 }
