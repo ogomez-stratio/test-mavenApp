@@ -8,3 +8,9 @@ mavenDockerBuilderPipeline{
   registryCredentialsId = 'docker-credentials'
   pomPath = 'scddatanps/'
 }
+uploadBlobArtifactPipeline{
+  containerName = 'sanitas-scddatanps'
+  pomPath = 'scddatanps'
+  localpath ='./'
+  storagecreds = 'creds'
+}
